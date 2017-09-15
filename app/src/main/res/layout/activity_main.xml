@@ -8,6 +8,7 @@
     tools:context="org.togther.cupramentogether.MainActivity">
 
     <LinearLayout
+        android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:weightSum="100"
@@ -40,10 +41,18 @@
             android:textAlignment="center"/>
 
     </LinearLayout>
-    <ListView
-        android:id="@+id/chat_listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_below="@id/top"
+        android:layout_width='match_parent'
+        android:layout_height='match_parent'>
+        <ListView
+            android:id='@+id/chat_listview'
+            android:layout_height='match_parent'
+            android:layout_width='match_parent'
+            android:divider='#ffcc22'
+            android:dividerHeight='1.5dp'
+            android:choiceMode='singleChoice'
+        />
+    </LinearLayout>
 
-    </ListView>
 </RelativeLayout>
