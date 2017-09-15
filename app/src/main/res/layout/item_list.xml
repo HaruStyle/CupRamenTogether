@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation='horizontal'
+    android:layout_width='match_parent'
+    android:layout_height='match_parent'>
+    <TextView
+        android:id='@+id/chat_ranking'
+        android:layout_width='60dp'
+        android:layout_height='60dp'
+        android:gravity='center'/>
+    <ImageView
+        android:id='@+id/chat_raman'
+        android:layout_width='60dp'
+        android:layout_height='60dp'/>
+    <ImageView
+        android:id='@+id/chat_rice'
+        android:layout_width='60dp'
+        android:layout_height='60dp'/>
+    <ImageView
+        android:id='@+id/chat_bread'
+        android:layout_width='60dp'
+        android:layout_height='60dp'/>
+    <ImageView
+        android:id='@+id/chat_water'
+        android:layout_width='60dp'
+        android:layout_height='60dp'/>
+    <TextView
+         android:id='@+id/chat_re_cnt'
+         android:layout_width='match_parent'
+         android:layout_height='60dp'
+         android:gravity='center'/>
+</LinearLayout>
