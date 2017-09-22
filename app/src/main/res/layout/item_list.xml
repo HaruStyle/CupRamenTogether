@@ -2,31 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation='horizontal'
     android:layout_width='match_parent'
-    android:layout_height='match_parent'>
+    android:layout_height='60dp'
+    android:weightSum="100">
+
     <TextView
         android:id='@+id/chat_ranking'
-        android:layout_width='60dp'
+        android:layout_width='0dp'
         android:layout_height='60dp'
+        android:layout_weight="20"
+        android:textSize="30dp"
+        android:textStyle="bold"
         android:gravity='center'/>
     <ImageView
         android:id='@+id/chat_raman'
-        android:layout_width='60dp'
-        android:layout_height='60dp'/>
-    <ImageView
-        android:id='@+id/chat_rice'
-        android:layout_width='60dp'
-        android:layout_height='60dp'/>
-    <ImageView
-        android:id='@+id/chat_bread'
-        android:layout_width='60dp'
+        android:layout_width='0dp'
+        android:layout_weight="15"
         android:layout_height='60dp'/>
     <ImageView
         android:id='@+id/chat_water'
-        android:layout_width='60dp'
+        android:layout_width='0dp'
+        android:layout_weight="15"
         android:layout_height='60dp'/>
+    <ImageView
+        android:id='@+id/chat_rice'
+        android:layout_width='0dp'
+        android:layout_weight="15"
+        android:layout_height='60dp'/>
+    <ImageView
+        android:id='@+id/chat_bread'
+        android:layout_width='0dp'
+        android:layout_weight="15"
+        android:layout_height='60dp'/>
+
     <TextView
          android:id='@+id/chat_re_cnt'
-         android:layout_width='match_parent'
+        android:layout_width='0dp'
+        android:layout_weight="20"
          android:layout_height='60dp'
+         android:textSize="20dp"
          android:gravity='center'/>
 </LinearLayout>

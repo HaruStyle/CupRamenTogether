@@ -12,32 +12,35 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:weightSum="100"
-        android:background="#acedb4"
+        android:background="#6e6e6e"
         >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="10"
+            android:layout_weight="20"
             android:textSize="20dp"
             android:text="순 위"
+            android:textColor="#ffffff"
             android:textAlignment="center"
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="70"
+            android:layout_weight="60"
             android:textSize="20dp"
             android:text="추 천 조 합"
+            android:textColor="#ffffff"
             android:textAlignment="center"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="20"
             android:textSize="20dp"
             android:text="댓 글 수"
+            android:textColor="#ffffff"
             android:textAlignment="center"/>
 
     </LinearLayout>
@@ -49,9 +52,6 @@
             android:id='@+id/chat_listview'
             android:layout_height='match_parent'
             android:layout_width='match_parent'
-            android:divider='#ffcc22'
-            android:dividerHeight='1.5dp'
-            android:choiceMode='singleChoice'
         />
     </LinearLayout>
 

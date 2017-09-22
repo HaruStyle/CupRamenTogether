@@ -21,10 +21,11 @@
             android:paddingRight="24dp">
             <!-- ID 전화번호 -->
             <TextView
+                android:id="@+id/login_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:height="50dp"
+                android:textSize="30dp"
                 android:text="010-****-1234"
                 android:gravity="center"/>
 
@@ -33,11 +34,12 @@
                 android:id="@+id/input_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="100dp"
+                android:textSize="40dp"
                 android:inputType="numberPassword"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
+                android:maxLength="4"
                 />
 
             <Button
