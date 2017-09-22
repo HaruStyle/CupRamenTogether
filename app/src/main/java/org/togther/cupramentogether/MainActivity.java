@@ -1,6 +1,7 @@
 package org.togther.cupramentogether;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -82,5 +84,26 @@ public class MainActivity extends AppCompatActivity {
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1,items);
 
         listview.setAdapter(itemAdpater);
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // 상세정보 화면으로 이동하기(인텐트 날리기)
+                // 1. 다음화면을 만든다
+                // 2. AndroidManifest.xml 에 화면을 등록한다
+                // 3. Intent 객체를 생성하여 날린다
+                Intent intent = new Intent(
+                        getApplicationContext(), // 현재화면의 제어권자
+                        DetailActivity.class); // 다음넘어갈 화면
+
+                // intent 객체에 데이터를 실어서 보내기
+                // 리스트뷰 클릭시 인텐트 (Intent) 생성하고 position 값을 이용하여 인텐트로 넘길값들을 넘긴다
+                intent.putExtra("rangking", itemList.get(position).ranking);
+                intent.putExtra("img_raman", itemList.get(position).img_raman);
+                intent.putExtra("re_cnt", itemList.get(position).re_cnt);
+
+                startActivity(intent);
+            }
+        });
     }
 }
