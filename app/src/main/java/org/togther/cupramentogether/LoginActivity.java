@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
         try{
             PhoneNum = telManager.getLine1Number();
             PhoneNum = PhoneNum.replace("+82","0");
-        }catch (Exception e){PhoneNum = "010-XXXX-1234";}
+        }catch (Exception e){PhoneNum = "010-4321-1234";}
 
         final TextView login_id = (TextView)findViewById(R.id.login_id);
         login_id.setText(PhoneNum.toString());

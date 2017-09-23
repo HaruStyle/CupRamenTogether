@@ -1,31 +1,74 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/abc_btn_radio_to_on_mtrl_015" />
-
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:id="@+id/dtl_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/imageView1"
-        android:text="Title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:text="Ranking 댓글"/>
 
+    <LinearLayout
+        android:id="@+id/dtl_img"
+        android:layout_below="@+id/dtl_title"
+        android:orientation='horizontal'
+        android:layout_width='match_parent'
+        android:layout_height='100dp'
+        android:weightSum="100"
+        android:background="#a9cdea">
+            <ImageView
+                android:id="@+id/dtl_img_r"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="25"/>
+            <ImageView
+                android:id="@+id/dtl_img_w"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="25"/>
+            <ImageView
+                android:id="@+id/dtl_img_c"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="25"/>
+            <ImageView
+                android:id="@+id/dtl_img_b"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="25"/>
+
+     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dtl_info"
+        android:layout_below="@+id/dtl_img"
+        android:orientation='horizontal'
+        android:layout_width='match_parent'
+        android:layout_height='100dp'
+        android:weightSum="100"
+        android:background="#a9cdea">
+
+        <TextView
+            android:id="@+id/dtl_ranking"
+            android:layout_below="@+id/dtl_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="60dp"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/dtl_re_cnt"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="20"
+            android:textSize="30dp"
+            android:textAlignment="center" />
+    </LinearLayout>
+    
     <TextView
-        android:id="@+id/textView2"
+        android:layout_below="@+id/dtl_info"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView1"
-        android:text="Artist"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
