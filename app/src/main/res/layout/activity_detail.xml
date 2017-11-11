@@ -64,7 +64,7 @@
             android:textSize="30dp"
             android:textAlignment="center" />
     </LinearLayout>
-    
+
     <TextView
         android:layout_below="@+id/dtl_info"
         android:id="@+id/textView3"

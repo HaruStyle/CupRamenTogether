@@ -1,40 +1,134 @@
 package org.togther.cupramentogether;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Iterator;
 
 public class LoginActivity extends AppCompatActivity {
-    String PhoneNum = null;
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_login);
+  }
+  public void login(View view) {
+    EditText userIdText = (EditText)findViewById(R.id.user_id);
+    EditText passwordText = (EditText)findViewById(R.id.password);
+    new Login().execute(
+      "http://172.16.2.18:52273/user/login",
+      userIdText.getText().toString(),
+      passwordText.getText().toString());
+    Log.i("TTTTTTTTT",userIdText.getText().toString()+passwordText.getText().toString());
+  }
+  class Login extends AsyncTask<String,String,String> {
+    ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    protected String doInBackground(String... params) {
+      StringBuilder output = new StringBuilder();
+      try {
+        URL url = new URL(params[0]);
+        JSONObject postDataParams = new JSONObject();
+        postDataParams.put("user_id", params[1]);
+        postDataParams.put("password", params[2]);
+Log.i("TTTTTTTTT_s",postDataParams.toString());
+Log.i("TTTTTTTTT_url : ",url.toString());
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        if (conn != null) {
+          conn.setConnectTimeout(10000);
+          conn.setRequestMethod("POST");
+          conn.setDoInput(true); conn.setDoOutput(true);
+          OutputStream os = conn.getOutputStream();
+          BufferedWriter writer = new BufferedWriter(
+            new OutputStreamWriter(os, "UTF-8"));
+          writer.write(getPostDataString(postDataParams));
+          writer.flush();
+          writer.close();
+          os.close();
+          BufferedReader reader = new BufferedReader(
+            new InputStreamReader(conn.getInputStream()));
+          String line = null;
+          while(true) {
+            line = reader.readLine();
+            if (line == null) break;
+            output.append(line);
+          }
+          reader.close();
+          conn.disconnect();
+        }
+      } catch (Exception e) { e.printStackTrace(); }
+      return output.toString();
+    }
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+      dialog.setMessage("로그인 중...");
+      dialog.show();
+    }
+    @Override
+    protected void onPostExecute(String s) {
+      super.onPostExecute(s);
+      dialog.dismiss();
+      try {
+        JSONObject json = new JSONObject(s);
+        if (json.getBoolean("result") == true) {//로그인 성공
+          String token = json.getString("token");
+          SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+          SharedPreferences.Editor editor = pref.edit();
+          editor.putString("token", token);
+          editor.commit();
+          Intent intent = new Intent(LoginActivity.this, WebViewActivity.class);
+          startActivity(intent);
+          finish();
+        } else {//로그인 실패
+          Toast.makeText(LoginActivity.this,
+            "아이디가 없거나 암호가 틀렸습니다.",
+            Toast.LENGTH_SHORT).show();
+        }
+      } catch (Exception e) { e.printStackTrace(); }
+    }
+  }
 
-        TelephonyManager telManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-        try{
-            PhoneNum = telManager.getLine1Number();
-            PhoneNum = PhoneNum.replace("+82","0");
-        }catch (Exception e){PhoneNum = "010-4321-1234";}
+  public String getPostDataString(JSONObject params) throws Exception {
 
-        final TextView login_id = (TextView)findViewById(R.id.login_id);
-        login_id.setText(PhoneNum.toString());
+    StringBuilder result = new StringBuilder();
+    boolean first = true;
 
-        Button b = (Button)findViewById(R.id.btn_login);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(
-                        getApplicationContext(), // 현재 화면의 제어권자
-                        MainActivity.class); // 다음 넘어갈 클래스 지정
-                startActivity(intent); // 다음 화면으로 넘어간다
-            }
-        });
+    Iterator<String> itr = params.keys();
+
+    while(itr.hasNext()){
+
+      String key= itr.next();
+      Object value = params.get(key);
+
+      if (first)
+        first = false;
+      else
+        result.append("&");
+
+      result.append(URLEncoder.encode(key, "UTF-8"));
+      result.append("=");
+      result.append(URLEncoder.encode(value.toString(), "UTF-8"));
 
     }
+    return result.toString();
+  }
 }

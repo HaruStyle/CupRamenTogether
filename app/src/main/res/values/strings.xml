@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">CupRamenTogether</string>
-    <string name="title_activity_item_detail">Item_detail</string>
+  <string name="app_name">컵라면 투게더</string>
+  <string name="title_activity_item_detail">Item_detail</string>
 </resources>

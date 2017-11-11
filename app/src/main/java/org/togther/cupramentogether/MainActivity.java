@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    //로딩
+    private CustomAnimationDialog customAnimationDialog;
+    private Button btnLoad;
+
     ListView listview = null;
     class Item{
         int img_raman;
@@ -76,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
         listview = (ListView)findViewById(R.id.chat_listview);
         itemList.add(new Item("1",R.drawable.r01, R.drawable.b01,R.drawable.c01,R.drawable.w01,"100"));
 
@@ -108,5 +114,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void initView(){
+        btnLoad = (Button) findViewById(R.id.btn_load);
+        btnLoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customAnimationDialog = new CustomAnimationDialog(MainActivity.this);
+                customAnimationDialog.show();
+            }
+        });
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        customAnimationDialog.dismiss();
     }
 }
